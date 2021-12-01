@@ -1,6 +1,6 @@
 # Pacman AI Implementation
 
-This implementation is the extension of the Pacman project ![http://ai.berkeley.edu/project_overview.html].
+This implementation is the extension of the Pacman project http://ai.berkeley.edu/project_overview.html.
 
 ## Dependencies 
 Python >= 3.9
