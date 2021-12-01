@@ -2,6 +2,8 @@
 
 This implementation is the extension of the Pacman project http://ai.berkeley.edu/project_overview.html.
 
+![Pacman gif](http://ai.berkeley.edu/images/pacman_game.gif)
+
 ## Dependencies 
 Python >= 3.9
 Numpy >= 1.21.4
