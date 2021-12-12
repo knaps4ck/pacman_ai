@@ -39,7 +39,7 @@ class IDSAgent(IDSSearchAgent):
         gameState.data.layout.walls[currPos[0]][currPos[1]] = False
         max_action = max(action_scores)        
         max_indices = [index for index in range(len(action_scores)) if action_scores[index] == max_action]
-        chosenIndex = random.choice(max_indices)
+        chosenIndex = random.choice(max_indices)                
         return legalActions[chosenIndex]
 
 def evaluationFunction(currState):

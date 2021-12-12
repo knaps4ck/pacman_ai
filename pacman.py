@@ -497,19 +497,13 @@ def runGames(layout, pacman, ghosts, display, numGames, record, numTraining=0, c
     rules = ClassicGameRules(timeout)
     games = []
 
-    for i in range(numGames):
-        beQuiet = i < numTraining
-        if beQuiet:
-                
-            import textDisplay
-            gameDisplay = textDisplay.NullGraphics()
-            rules.quiet = True
-        else:
-            gameDisplay = display
-            rules.quiet = False
+    for i in range(2):
+        beQuiet = i < numTraining       
+        gameDisplay = display
+        rules.quiet = False
         game = rules.newGame(layout, pacman, ghosts,
-                             gameDisplay, beQuiet, catchExceptions)
-        game.run()
+                             gameDisplay, beQuiet, catchExceptions)            
+        game.run()                
         if not beQuiet:
             games.append(game)
 
