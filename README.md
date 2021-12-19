@@ -26,4 +26,11 @@ $ python pacman.py -p AlphaBetaAgent -l openClassic
 $ python pacman.py -p IDSAgent -l mediumClassic
 ```
 
-Different types of mazes are available in layouts directory. To run above algorithms on layout specified in layouts directory replace -l mediumClassic/openClassic to -l {layoutName}
+# Neural Network
+- CNN: Running neural network on Pacman
+```
+$ python pacmanNN.py -p PacmanDQNAgent -n 4000 -x 3000 -l mediumClassic
+```
+-n is the total number of steps, -x is the training set.
+
+Different types of mazes are available in layouts directory. To run above algorithms on layout specified in layouts directory replace -l mediumClassic to -l {layoutName}

@@ -530,8 +530,7 @@ class Game:
 
         start_time = round(time.time())
         randTimeOffset = random.randint(5,30)
-        end_time = start_time + randTimeOffset
-        print("Random time(secs):",randTimeOffset)
+        end_time = start_time + randTimeOffset        
         while not self.gameOver:                                               
             agent = self.agents[agentIndex]
             move_time = 0
