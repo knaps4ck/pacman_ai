@@ -528,8 +528,10 @@ class Game:
         agentIndex = self.startingIndex
         numAgents = len(self.agents)
 
-        while not self.gameOver:
-            
+        start_time = round(time.time())
+        randTimeOffset = random.randint(5,30)
+        end_time = start_time + randTimeOffset        
+        while not self.gameOver:                                               
             agent = self.agents[agentIndex]
             move_time = 0
             skip_action = False
@@ -627,10 +629,10 @@ class Game:
             self.rules.process(self.state, self)
             
             if agentIndex == numAgents + 1:
-                self.numMoves += 1
-            
+                self.numMoves += 1            
             agentIndex = (agentIndex + 1) % numAgents           
-        
+            if end_time - round(time.time()) == 0:
+                self.gameOver = True
         for agentIndex, agent in enumerate(self.agents):
             if "final" in dir(agent):
                 try:

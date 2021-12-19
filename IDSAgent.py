@@ -7,23 +7,24 @@ import numpy as np
 
 class IDSSearchAgent(Agent):
 
-    def __init__(self, evalFn = 'evaluationFunction', depth='6'):
+    def __init__(self, evalFn = 'evaluationFunction'):
         self.index = 0
         self.evaluationFunction = util.lookup(evalFn, globals())
-        self.depth = int(depth)
+        self.depth = 6
 
-class IDSAgent(IDSSearchAgent):
-    def IDS(self, depth, gameState):
-        if len(getLegalActionsWithNoStops(0, gameState)) == 0 or gameState.isLose() \
-                or depth == self.depth or gameState.isWin():
+class IDSAgent(IDSSearchAgent):            
+
+    def IDS(self, depth, gameState):                      
+        if len(getLegalActionsWithNoStops(0, gameState)) == 0 or gameState.isLose() or depth == 0 or gameState.isWin():
             return self.evaluationFunction(gameState) - depth * 100
         currPos = gameState.getPacmanPosition()
-        gameState.data.layout.walls[currPos[0]][currPos[1]] = True
+        gameState.data.layout.walls[currPos[0]][currPos[1]] = True        
         val = []
-        for action in getLegalActionsWithNoStops(0, gameState):
-            val.append(self.IDS(depth + 1, gameState.generateSuccessor(0, action)))
-        max_val = max(val)
-        gameState.data.layout.walls[currPos[0]][currPos[1]] = False
+        for max_depth in range(1, depth+1):        
+            for action in getLegalActionsWithNoStops(0, gameState):
+                val.append(self.IDS(max_depth - 1, gameState.generateSuccessor(0, action)))                
+        max_val = max(val)                
+        gameState.data.layout.walls[currPos[0]][currPos[1]] = False        
         return max_val + self.evaluationFunction(gameState) - depth * 100
 
     def getAction(self, gameState):       
@@ -32,13 +33,13 @@ class IDSAgent(IDSSearchAgent):
         legalActions = getLegalActionsWithNoStops(0, gameState)
         action_scores = []
         currPos = gameState.getPacmanPosition()
-        gameState.data.layout.walls[currPos[0]][currPos[1]] = True
-        for action in legalActions:
-            action_scores.append(self.IDS(0, gameState.generateSuccessor(0, action)))
+        gameState.data.layout.walls[currPos[0]][currPos[1]] = True    
+        for action in legalActions:            
+            action_scores.append(self.IDS(self.depth, gameState.generateSuccessor(0, action)))
         gameState.data.layout.walls[currPos[0]][currPos[1]] = False
-        max_action = max(action_scores)
+        max_action = max(action_scores)        
         max_indices = [index for index in range(len(action_scores)) if action_scores[index] == max_action]
-        chosenIndex = random.choice(max_indices)
+        chosenIndex = random.choice(max_indices)                
         return legalActions[chosenIndex]
 
 def evaluationFunction(currState):
@@ -64,8 +65,6 @@ def evaluationFunction(currState):
             return 999999
     return currState.getScore() * 5 - minFoodDistance
 
-def scoreEvaluationFunction(currState):
-    return currState.getScore()
     
 def getLegalActionsWithNoStops(index, gameState):
     legalActions = gameState.getLegalActions(index)
