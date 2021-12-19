@@ -7,6 +7,7 @@ This implementation is the extension of the Pacman project http://ai.berkeley.ed
 ## Dependencies 
 Python >= 3.9
 Numpy >= 1.21.4
+Tensorflow
 
 ## Human
 Play game by running the below command and using ASWD or arrow keys:
